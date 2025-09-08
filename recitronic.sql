@@ -208,9 +208,22 @@ DELETE FROM articulos WHERE id_articulo = 30;
 
 -- TRANSACCIONES
 
-START TRANSACTION ;
+START TRANSACTION;
 
-UPDATE 
+-- Insertar un pago para el cliente 1
+INSERT INTO pagos (id_cliente, monto, fecha_pago)
+VALUES (1, 5000, NOW());
+
+-- Actualizar la fecha de la cita del cliente 1
+UPDATE citas
+SET fecha_hora = '2025-09-12 10:00:00'
+WHERE id_cliente = 1 AND id_cita = 1;
+
+-- Confirmar la transacción si todo está correcto
+COMMIT;
+
+-- Si ocurre algún error, revertir todos los cambios
+-- ROLLBACK; -- (esto se ejecuta automáticamente si hay error)
 
 
 
